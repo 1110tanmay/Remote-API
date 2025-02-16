@@ -15,7 +15,7 @@ export default class App extends Component {
               onLoad = async () => {
                 this.setState({ results: 'Loading, please wait...' });
                 const response = await
-                fetch('http://jsonplaceholder.typicode.com/users', {
+                fetch('https://2s4b8wlhik.execute-api.us-east-1.amazonaws.com/studentData', {
                   method: 'GET',
                 });
                 const results = await response.text();
