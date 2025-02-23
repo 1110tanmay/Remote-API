@@ -38,6 +38,10 @@ export default class App extends Component {
                       {styles.btn}>
                         <Text>Load data</Text>
                       </TouchableOpacity>
+                      <TouchableOpacity onPress={this.onLoad} style=
+                      {styles.btn}>
+                        <Text>Load data</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
                 );
