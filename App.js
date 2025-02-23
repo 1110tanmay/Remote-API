@@ -13,16 +13,18 @@ export default class App extends Component {
     selectedGrade: '',
   };
 
-  fetchStudentData = async (grade) => {
-    this.setState({ results: 'Loading, please wait...', selectedGrade: grade });
+  onload = async (grades) => {
+    this.setState({ results: 'Loading, please wait...', selectedGrade: grades });
 
-    try {
-      const response = await fetch(`https://2s4b8wlhik.execute-api.us-east-1.amazonaws.com/studentData?grade=${grade}`);
-      const students = await response.json(); // Assuming API returns an array of names
-      this.setState({ results: students.join('\n') }); // Display names as a list
-    } catch (error) {
-      this.setState({ results: 'Error fetching data' });
-    }
+    onLoad = async (grades) => {
+      this.setState({ results: 'Loading, please wait...', selectedGrade: grades });
+      
+      const response = await fetch(`https://2s4b8wlhik.execute-api.us-east-1.amazonaws.com/studentData?grade=${grades}`, {
+        method: 'GET',
+      });
+  
+      const results = await response.text();
+      this.setState({ results });
   };
 
   render() {
@@ -43,9 +45,9 @@ export default class App extends Component {
             multiline
           />
 
-          {['A', 'B', 'C', 'D', 'E'].map((grade) => (
-            <TouchableOpacity key={grade} onPress={() => this.fetchStudentData(grade)} style={styles.btn}>
-              <Text>Grade {grade}</Text>
+          {['A', 'B', 'C', 'D', 'E'].map((grades) => (
+            <TouchableOpacity key={grades} onPress={() => this.onload(grades)} style={styles.btn}>
+              <Text>Grade {grades}</Text>
             </TouchableOpacity>
           ))}
         </View>
